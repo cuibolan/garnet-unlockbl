@@ -14,3 +14,11 @@
 1. 电脑装好 Python。
 2. pip install pyusb (Windows 记得用 Zadig 把 Fastboot 驱动换成 WinUSB)。
 3. 手机进 Fastboot，插上电脑。
+
+第一步：提取镜像与生成 Payload
+执行gen_payload.py
+第二步：通过 USB 发送 Payload
+执行execute_unlock.py
+
+预期结果:
+如果一切完美，发送完之后设备可能会直接黑屏重启，或者 fastboot 状态改变，由于我已经把 Shellcode 的 ret 做好了，最理想的情况是不崩溃，直接解锁；不过目前只本地测试了红米 note13Pro5G版(特别注意，这个是5G,不是4G的),如果确保是同个机型，在确保版本相同，比如我现在就是3.0.306的澎湃版本,所以特别建议同一个版本，这样子成功率会高一点
