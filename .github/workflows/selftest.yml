@@ -6,12 +6,20 @@ on:
 
 jobs:
   test:
-    name: python ${{ matrix.python }}
-    runs-on: ubuntu-latest
+    name: python ${{ matrix.python }} (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        python: ["3.9", "3.11", "3.12"]
+        # setup-python 的 x64 Linux 构建目前覆盖到 24.04，没有 26.04（ubuntu-latest 已是 26.04），
+        # 所以 3.9 固定在 24.04 上跑，用来守住 README 里「3.8+ 可用」的下限。
+        include:
+          - python: "3.9"
+            os: ubuntu-24.04
+          - python: "3.11"
+            os: ubuntu-latest
+          - python: "3.12"
+            os: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
