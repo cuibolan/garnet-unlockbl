@@ -1,0 +1,28 @@
+name: selftest
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: python ${{ matrix.python }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.9", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: 自测（仅标准库，无第三方依赖）
+        run: python tests/selftest.py
+
+      - name: 演示模式（确认报告能正常生成）
+        run: |
+          python analyze_abl.py --demo
+          python analyze_abl.py --demo elf
