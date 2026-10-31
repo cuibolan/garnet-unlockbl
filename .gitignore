@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+*.report.json
+_selftest_*
+_fixtures/
+*.img
+*.elf
+unlock_payload.txt
+tmp_*/
