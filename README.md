@@ -11,6 +11,8 @@
 
 与其继续维护一个不工作的"工具"，不如把它变成能回答问题的东西。
 
+**文档**：[核查记录（逐条证伪）](docs/findings.md) · [怎么拿到 abl 镜像](docs/how-to-get-abl.md)
+
 ## 这个工具做什么
 
 给一份 ABL 镜像（`abl_a` 分区 dump），在没有手机、不联网的情况下回答：
@@ -47,9 +49,15 @@ python tests/selftest.py     # 24 项断言，含 raw / ELF / LZMA 三条解析�
 
 ## 拿镜像
 
-需要 root 才能 `dd` 出 `abl_a`（这本身也是原帖逻辑的破绽：能 root 就不需要这套解锁了）。
-没有设备时，也可以直接解压官方 fastboot 包（`abl.elf` 通常在 `images/` 目录里），
-不碰手机就能分析。**请不要用别人网盘里的"payload"文件做任何事。**
+两条路，详见 [docs/how-to-get-abl.md](docs/how-to-get-abl.md)：
+
+1. **官方固件包**（推荐）：解压 HyperOS fastboot 包，取 `images/abl.elf`，
+   不用设备、不用 root，可复现。
+2. **手机 dump**：需要 root。注意"有 root"和"解了 BL"是两件事——小米上有通过
+   系统服务漏洞加载 KernelSU LKM 的免解锁方案，它能让你 dump 出 `abl_a`，
+   但不改变"能不能解锁"这个问题。
+
+**请不要用别人网盘里的"payload"文件做任何事。**
 
 ## 报告怎么读
 
