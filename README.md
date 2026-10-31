@@ -17,7 +17,9 @@
 
 第一步：提取镜像与生成 Payload
 执行gen_payload.py
-第二步：通过 USB 发送 Payload
+
+
+第二步：通过 USB 发送 Payload(自己手动改一下脚本里的payload.txt路径)
 执行execute_unlock.py
 
 预期结果:
